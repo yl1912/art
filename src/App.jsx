@@ -9,6 +9,7 @@ import AdminRoute from "./components/AdminRoute";
 import AdminPage from "./pages/AdminPage";
 import SearchPage from "./pages/SearchPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import { CartProvider, useCart } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -27,6 +28,7 @@ function AppContent() {
       <Routes>
         {/* HOME */}
         <Route path="/" element={<CategoryPage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
 
         {/* SEARCH */}
         <Route path="/search" element={<SearchPage />} />

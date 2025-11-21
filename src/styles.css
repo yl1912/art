@@ -108,6 +108,7 @@ a {
 
 /* DROPDOWN */
 .dropdown-menu {
+  color: white;
   position: absolute;
   top: 110%;
   left: 0;
@@ -126,6 +127,7 @@ a {
   padding: 6px 0;
   font-size: 12px;
   cursor: pointer;
+  color: white;
 }
 
 .dropdown-menu li:hover {
@@ -135,6 +137,17 @@ a {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+.dropdown-menu a {
+  color: white !important;
+  pointer-events: auto;
+  display: block;
+  padding: 8px 12px;
+}
+
+.dropdown-menu {
+  z-index: 9999;
+}
+
 
 /* ICONS */
 .user-box-wrapper {
@@ -548,6 +561,23 @@ a {
 
 .footer-col ul li:hover {
   color: #555;
+}
+.map-box {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Icon social */
+.social-links a {
+  font-size: 26px;
+  margin-right: 14px;
+  color: #333;
+}
+
+.social-links a:hover {
+  color: #000;
 }
 
 /* Liên lạc */

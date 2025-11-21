@@ -1,38 +1,52 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useCart } from "../context/CartContext";
-import { useAuth } from "../context/AuthContext";
 
 export default function CategoryPage() {
+  const { category } = useParams(); // lấy /category/:category
   const [sort, setSort] = useState("newest");
   const [products, setProducts] = useState([]);
-
   const { addToCart } = useCart();
-  const { isAuthenticated } = useAuth();
 
-  // 🔥 Lấy sản phẩm từ Supabase
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [category]);
 
+  // ⭐ Lấy sản phẩm theo category
   const fetchProducts = async () => {
-    const { data, error } = await supabase.from("products").select("*");
+    let query = supabase.from("products").select("*");
+
+    if (category && category !== "all") {
+      query = query.eq("category", category); // lọc đúng key
+    }
+
+    const { data, error } = await query;
     if (!error) setProducts(data);
   };
 
-  // 🔥 Sắp xếp
+  // ⭐ Sắp xếp
   const sortedProducts = [...products].sort((a, b) => {
     if (sort === "price-asc") return a.fromprice - b.fromprice;
     if (sort === "price-desc") return b.fromprice - a.fromprice;
     return 0;
   });
 
+  // ⭐ Map tiêu đề
+  const categoryNames = {
+    "all": "Tất cả sản phẩm",
+    "truu-tuong": "Tranh Trừu tượng",
+    "thuc-vat": "Tranh Thực vật",
+    "dong-vat": "Tranh Động vật",
+    "ban-do": "Tranh Bản đồ & Thành phố"
+  };
+
   return (
     <div className="category-page">
-      {/* ⭐ TIÊU ĐỀ */}
-      <h2 className="category-title">TẤT CẢ SẢN PHẨM</h2>
+      <h2 className="category-title">
+        {categoryNames[category] || "Tất cả sản phẩm"}
+      </h2>
 
-      {/* ⭐ THANH SẮP XẾP */}
       <div className="sort-bar">
         <span>Sắp xếp theo:</span>
         <select value={sort} onChange={(e) => setSort(e.target.value)}>
@@ -42,10 +56,8 @@ export default function CategoryPage() {
         </select>
       </div>
 
-      {/* ⭐ LOADING */}
-      {products.length === 0 && <p>Đang tải sản phẩm...</p>}
+      {products.length === 0 && <p>Không có sản phẩm nào.</p>}
 
-      {/* ⭐ GRID SẢN PHẨM */}
       <div className="product-grid">
         {sortedProducts.map((p) => (
           <div key={p.id} className="product-card">

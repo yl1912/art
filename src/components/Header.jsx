@@ -23,7 +23,6 @@ export default function Header() {
 
   return (
     <>
-      {/* BANNER TRÊN CÙNG */}
       <div className="top-banner">
         GIAO HÀNG TỪ 2-5 NGÀY LÀM VIỆC.
         <span className="top-banner-hotline">
@@ -34,7 +33,6 @@ export default function Header() {
       <header className="header">
         <div className="header-left" />
 
-        {/* LOGO + MENU */}
         <div className="header-center">
           <Link to="/" className="logo">
             TranhDecor
@@ -46,16 +44,32 @@ export default function Header() {
                 <Link to="/">Tất cả</Link>
               </li>
 
+              {/* DROPDOWN 1 */}
               <li className="nav-item dropdown">
-                <span className="nav-link">TRANH BỘ</span>
-                <ul className="dropdown-menu">
-                  <li>Trừu tượng</li>
-                  <li>Thực vật</li>
-                  <li>Động vật</li>
-                  <li>Thiên nhiên</li>
-                </ul>
-              </li>
+  <span className="nav-link">TRANH BỘ</span>
+  <ul className="dropdown-menu">
 
+    <li>
+      <Link to="/category/truu-tuong">TRỪU TƯỢNG</Link>
+    </li>
+
+    <li>
+      <Link to="/category/thuc-vat">THỰC VẬT</Link>
+    </li>
+
+    <li>
+      <Link to="/category/dong-vat">ĐỘNG VẬT</Link>
+    </li>
+
+    <li>
+      <Link to="/category/ban-do">BẢN ĐỒ & THÀNH PHỐ</Link>
+    </li>
+
+  </ul>
+</li>
+
+
+              {/* DROPDOWN 2 */}
               <li className="nav-item dropdown">
                 <span className="nav-link">BỘ SƯU TẬP</span>
                 <ul className="dropdown-menu">
@@ -70,6 +84,7 @@ export default function Header() {
                 </ul>
               </li>
 
+              {/* DROPDOWN 3 */}
               <li className="nav-item dropdown">
                 <span className="nav-link">TRANH RỜI</span>
                 <ul className="dropdown-menu">
@@ -83,17 +98,11 @@ export default function Header() {
                   <li>Nét vẽ tay</li>
                 </ul>
               </li>
-
-              <li className="nav-item">
-                <span>GALLERY WALL</span>
-              </li>
             </ul>
           </nav>
         </div>
 
-        {/* PHẦN BÊN PHẢI */}
         <div className="header-right">
-          {/* Ô TÌM KIẾM */}
           <form className="search-box" onSubmit={handleSearchSubmit}>
             <input
               type="text"
@@ -103,17 +112,14 @@ export default function Header() {
             />
           </form>
 
-          {/* GIỎ HÀNG */}
           <Link to="/cart" className="cart-btn">
             🛍
             {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
           </Link>
 
-          {/* USER + ADMIN */}
           <div className="user-box-wrapper">
             {isAuthenticated ? (
               <>
-                {/* USER */}
                 <div className="user-box">
                   <span className="user-icon">👤</span>
                   <div className="user-info">
@@ -124,7 +130,6 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* ADMIN */}
                 {isAdmin && (
                   <Link to="/admin" className="admin-btn">
                     ⚙️ Quản lý sản phẩm
